@@ -12,7 +12,7 @@ set runtimepath+=~/.vim
 
 source ~/.vim/configs/basic.vim
 source ~/.vim/configs/plugins.vim
-source ~/.vim/configs/extended.vim
+source ~/.vim/configs/custom.vim
 
 if filereadable(expand('~/.vimlocal'))
     source ~/.vimlocal
