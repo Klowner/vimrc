@@ -8,3 +8,6 @@ set autoread
 set wildmenu
 
 syntax enable
+
+set list
+set listchars=tab:→\ ,trail:←,extends:»,precedes:«
