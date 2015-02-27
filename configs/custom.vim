@@ -11,16 +11,31 @@
 set background=dark
 colo molokai
 
+" Section: Helpful Functions {{{1
+
+" highlight trailing whitespace with garish color
+function! HighlightExtraWhitespace()
+    highlight ExtraWhitespace ctermfg=red
+    match ExtraWhitespace /\s\+$/
+    highlight SpecialKey ctermbg=None
+endfunction
+
+" trim all trailing whitespace
+function! StripExtraWhitespace()
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    let @/=_s
+    call cursor(l, c)
+endfunction
 
 " Section: Keybindings {{{1
 
 let mapleader = " "
 let maplocalleader = " "
 
-nmap \e :NERDTreeToggle<CR>
-
 "" buffa flippin'
-map <C-e> :e#<CR>
 map <C-n> :bnext<CR>
 map <C-p> :bprev<CR>
 
@@ -33,13 +48,18 @@ nnoremap <CR> za
 "" magically fix indentation
 map <F7> mzgg=G`z<CR>
 
+"" toggle line numbers
+nmap <leader>n :set invnumber<CR>
+
+"" don't exist visual mode when shifting
+vnoremap < <gv
+vnoremap > >gv
 
 " Section: Visual tweaks {{{1
+" Section: Spellcheck {{{1
+"" spell check all git commit messages
 
-" highlight trailing whitespace with garish color
-function! HighlightExtraWhitespace()
-    highlight ExtraWhitespace ctermfg=red
-    match ExtraWhitespace /\s\+$/
-    highlight SpecialKey ctermbg=None
-endfunction
+"" underline misspelings
+hi clear SpellBad
+hi SpellBad cterm=underline
 

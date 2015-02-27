@@ -1,10 +1,10 @@
-" vim:fdm=marker:ts=4:sw=4:et: 
-"         _             _           
-"   _ __ | |_   _  __ _(_)_ __  ___ 
+" vim:fdm=marker:ts=4:sw=4:et:
+"         _             _
+"   _ __ | |_   _  __ _(_)_ __  ___
 "  | '_ \| | | | |/ _` | | '_ \/ __|
 "  | |_) | | |_| | (_| | | | | \__ \
 "  | .__/|_|\__,_|\__, |_|_| |_|___/
-"  |_|            |___/             
+"  |_|            |___/
 "
 "
 " Section: VIM-PLUG Installation {{{1
@@ -31,18 +31,36 @@ Plug 'altercation/vim-colors-solarized'
 
 "-----------------------------------------
 " Section: Functionality {{{1
-Plug 'tpope/vim-sensible'
+Plug 'Shougo/unite.vim' "{{{
+    autocmd FileType unite call s:unite_my_settings()
+    function! s:unite_my_settings()
 
+    endfunction
+"}}}
 Plug 'bling/vim-airline', "{{{
 	let g:airline#extensions#tabline#enabled = 1
 	let g:airline_theme = 'luna'
 "}}}
-
 Plug 'tpope/vim-fugitive', "{{{
-
+    map \b :Gblame<CR>
+    map \l :Glog<CR>
 "}}}
-"
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
+    let NERDTreeQuitOnOpen = 0
+    let NERDTreeShowLineNumbers = 0
+    nmap \e :NERDTreeToggle<CR>
+"}}}
+Plug 'Shougo/neocomplete.vim' "{{{
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
+    inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "<S-tab>"
+"}}}
+Plug 'Lokaltog/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 
 call plug#end()
 
