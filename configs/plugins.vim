@@ -22,7 +22,14 @@ call plug#begin('~/.vim/plugged')
 
 "-----------------------------------------
 " Section: Syntax {{{1
-Plug 'ap/vim-css-color', { 'for': ['css', 'less', 'sass'] }
+Plug 'ap/vim-css-color',      { 'for': ['css', 'less', 'sass'] }
+Plug 'othree/html5.vim',      { 'for': ['html'] }
+Plug 'nono/vim-handlebars',   { 'for': 'handlebars' }
+Plug 'tpope/vim-markdown',    { 'for': 'markdown' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' } "{{{
+    let g:javascript_conceal_function   = "ƒ"
+"}}}
+
 "-----------------------------------------
 " Section: Color Schemes {{{1
 Plug 'tomasr/molokai'
@@ -39,10 +46,20 @@ Plug 'Shougo/unite.vim' "{{{
         call unite#custom#profile('files', 'context.smartcase', 1)
         call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
 
+        call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+            \ 'ignore_pattern', join([
+            \ '\.git',
+            \ 'google/obj/',
+            \ 'dist/',
+            \ 'node_modules/',
+            \ 'tmp/'
+            \ ], '\|'))
         nmap <buffer> <C-j> <Plug>(unite_select_next_line)
         nmap <buffer> <C-k> <Plug>(unite_select_prev_line)
         nmap <buffer> <Esc> <Plug>(unite_exit)
     endfunction
+    
+    Plug 'Shougo/neomru.vim'           " Required for file_mru
 
     let g:unite_data_directory='~/tmp/unite'
     let g:unite_source_history_yank_enable = 1
@@ -51,12 +68,12 @@ Plug 'Shougo/unite.vim' "{{{
     nmap ; [unite]
     nnoremap [unite] <nop>
 
-    nnoremap <silent> [unite] :<C-u>Unite -toggle -no-split -buffer-name=mixed buffer file_mru -start-insert file_rec/async<CR>
+    nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=mixed buffer file_mru -start-insert file_rec/async<CR>
 
     nnoremap <leader>/ :Unite grep:.<CR>
-    nnoremap <silent> [unite]ma
-        \ :<C-u>Unite mapping<CR>
-    Plug 'Shougo/neomru.vim'           " Required for file_mru
+    nmap <C-y> [unite]y
+
+
 
     Plug 'Shougo/unite-outline' "{{{
         nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<CR>
@@ -90,9 +107,14 @@ Plug 'Shougo/neocomplete.vim' "{{{
     inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
     inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "<S-tab>"
 "}}}
+Plug 'scrooloose/syntastic' "{{{
+    let g:syntastic_enable_signs=1
+    let g:syntastic_auto_jump=0
+    let g:syntastic_javascript_jslint_conf = "--nomen"
+    let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+"}}}
 Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
