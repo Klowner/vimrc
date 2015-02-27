@@ -1,4 +1,5 @@
 set history=700
+set background=dark
 
 filetype plugin on
 filetype indent on

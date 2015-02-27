@@ -6,10 +6,30 @@
 "  \___|\__,_|___/\__\___/|_| |_| |_|
 "
 "
-" Section: Color Scheme {{{1
+" Section: Color Schemes {{{1
 
-set background=dark
-colo molokai
+function! ColorSchemeMolokai()
+    set background=dark
+    try
+        colo molokai
+    catch
+    endtry
+    highlight SpecialKey cterm=None ctermfg=235 ctermbg=None
+
+    hi SignColumn ctermbg=232
+    hi LineNr ctermbg=232 ctermfg=236
+endfunction
+
+function! ColorTermSolarized()
+    set background=dark
+    let g:solarized_termcolors = 256
+    let g:solarized_contrast = "high"
+    let g:solarized_termtrans = 1
+    try
+        colo solarized
+    endtry
+    highlight SpecialKey cterm=None ctermfg=234 ctermbg=None
+endfunction
 
 " Section: Helpful Functions {{{1
 
@@ -56,10 +76,17 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Section: Visual tweaks {{{1
+
+call ColorSchemeMolokai()
+
 " Section: Spellcheck {{{1
 "" spell check all git commit messages
 
 "" underline misspelings
 hi clear SpellBad
 hi SpellBad cterm=underline
+
+map <leader>ss :setlocal spell!<CR>
+map <leader>sn ]s
+map <leader>sp [s
 
