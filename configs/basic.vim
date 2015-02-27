@@ -1,3 +1,10 @@
+"  _               _
+" | |__   __ _ ___(_) ___
+" | '_ \ / _` / __| |/ __|
+" | |_) | (_| \__ \ | (__
+" |_.__/ \__,_|___/_|\___|
+"
+
 set history=700
 set background=dark
 
@@ -15,3 +22,4 @@ set infercase                       " Completion recognizes capitalisation
 set smartcase                       " Derp
 set ignorecase                      " Case insensitivity
 set incsearch                       " Search as you type
+
