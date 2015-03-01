@@ -54,9 +54,6 @@ endfunction
 
 " Section: Keybindings {{{1
 
-let mapleader = " "
-let maplocalleader = " "
-
 "" buffa flippin'
 map <C-n> :bnext<CR>
 map <C-p> :bprev<CR>

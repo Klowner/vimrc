@@ -61,19 +61,24 @@ Plug 'Shougo/unite.vim' "{{{
     
     Plug 'Shougo/neomru.vim'           " Required for file_mru
 
-    let g:unite_data_directory='~/tmp/unite'
+    let g:unite_data_directory=&backupdir . '/unite'
     let g:unite_source_history_yank_enable = 1
     let g:unite_source_rec_max_cache_files=5000
 
     nmap ; [unite]
     nnoremap [unite] <nop>
 
-    nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=mixed buffer file_mru -start-insert file_rec/async<CR>
+    nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=files -start-insert file_rec/async:!<CR>
 
     nnoremap <leader>/ :Unite grep:.<CR>
     nmap <C-y> [unite]y
 
-
+    " Use silver searcher if available
+    if executable('ag')
+        let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
+    else
+        echom "Silver Searcher is unavailable, unite results will probably be irritating"
+    endif
 
     Plug 'Shougo/unite-outline' "{{{
         nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<CR>
