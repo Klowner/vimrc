@@ -43,7 +43,7 @@ function! DetermineBackupDirectory()
     let l:dirpath=expand("/run/user/$UID")
     if isdirectory(l:dirpath)
         if !isdirectory(l:dirpath . 'vim')
-            mkdir(l:dirpath . 'vim')
+            call mkdir(l:dirpath . 'vim')
         endif
         let &backupdir=l:dirpath . 'vim'
     endif
@@ -71,9 +71,11 @@ call plug#begin('~/.vim/plugged')
 " Syntax
 "-----------------------------------------
 Plug 'ap/vim-css-color',      { 'for': ['css', 'less', 'sass'] }
-Plug 'othree/html5.vim',      { 'for': ['html'] }
 Plug 'nono/vim-handlebars',   { 'for': 'handlebars' }
+Plug 'groenewege/vim-less',   { 'for': 'less' }
+Plug 'othree/html5.vim',      { 'for': 'html' }
 Plug 'tpope/vim-markdown',    { 'for': 'markdown' }
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } "{{{
     let g:javascript_conceal_function   = "ƒ"
 "}}}
@@ -110,6 +112,8 @@ Plug 'Shougo/unite.vim' "{{{
     endfunction
 
     Plug 'Shougo/neomru.vim'           " Required for file_mru
+    Plug 'Shougo/unite-session'        " Provides session (project) support
+    Plug 'Shougo/unite-outline'
 
     let g:unite_data_directory=&backupdir . '/unite'
     let g:unite_source_history_yank_enable = 1
@@ -121,7 +125,7 @@ Plug 'Shougo/unite.vim' "{{{
     nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=files -start-insert file_rec/async:!<CR>
 
     nnoremap <leader>/ :Unite grep:.<CR>
-    nmap <C-y> [unite]y
+    "nmap <C-y> [unite]y
 
     " Use silver searcher if available
     if executable('ag')
@@ -172,7 +176,9 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
+Plug 'gregsexton/gitv'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'scrooloose/nerdcommenter' " <leader>cc comment, <leader>cu uncomment
 
 call plug#end()
 
