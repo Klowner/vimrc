@@ -1,13 +1,12 @@
-" vim:fdm=marker:ts=4:sw=4:et:
-"        _
-" __   _(_)_ __ ___  _ __ ___
-" \ \ / / | '_ ` _ \| '__/ __|
-"  \ V /| | | | | | | | | (__
-"   \_/ |_|_| |_| |_|_|  \___|
+" ┌──────────────────────────────┐
+" │ Mark's _  fairly decent      │
+" │ __   _(_)_ __ ___  _ __ ___  │
+" │ \ \ / / | '_ ` _ \| '__/ __| │
+" │  \ V /| | | | | | | | | (__  │
+" │   \_/ |_|_| |_| |_|_|  \___| │
+" │                              │
+" └──────────────────────────────┘
 "
-" Mark's .vimrc
-"------------------------------"
-
 " Section: Basic Configuration {{{1
 
 set runtimepath+=~/.vim
@@ -37,6 +36,9 @@ set backupdir=~/tmp
 set modelines=5
 set matchtime=1
 set modeline
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 
 " Attempt to put backup files in /run/user/$UID/vim
 function! DetermineBackupDirectory()
@@ -270,3 +272,4 @@ if filereadable(expand('~/.vimlocal'))
     source ~/.vimlocal
 endif
 
+" vim:fdm=marker:ts=4:sw=4:et:
