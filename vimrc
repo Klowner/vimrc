@@ -178,10 +178,10 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
 Plug 'gregsexton/gitv'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'scrooloose/nerdcommenter' " <leader>cc comment, <leader>cu uncomment
-
 call plug#end()
 
 " Section: Color Schemes {{{1
@@ -251,6 +251,10 @@ nmap <leader>n :set invnumber<CR>
 "" don't exist visual mode when shifting
 vnoremap < <gv
 vnoremap > >gv
+
+"" big jump up/down
+noremap J 30j
+noremap K 30k
 
 " Section: Visual tweaks {{{1
 
