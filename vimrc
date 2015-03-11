@@ -215,7 +215,7 @@ endfunction
 
 " highlight trailing whitespace with garish color
 function! HighlightExtraWhitespace()
-    highlight ExtraWhitespace ctermfg=red
+    highlight ExtraWhitespace ctermfg=204 ctermbg=161
     match ExtraWhitespace /\s\+$/
     highlight SpecialKey ctermbg=None
 endfunction
@@ -255,6 +255,14 @@ vnoremap > >gv
 "" big jump up/down
 noremap J 30j
 noremap K 30k
+
+"" Vim-Plug
+nnoremap <leader>pu :PlugUpdate<CR>
+nnoremap <leader>pi :PlugInstall<CR>
+nnoremap <leader>pc :PlugClean<CR>
+
+
+nnoremap <leader>sw :call StripExtraWhitespace()<CR>
 
 " Section: Visual tweaks {{{1
 
