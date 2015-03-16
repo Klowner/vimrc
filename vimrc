@@ -267,7 +267,7 @@ nnoremap <leader>sw :call StripExtraWhitespace()<CR>
 " Section: Visual tweaks {{{1
 
 call ColorSchemeMolokai()
-
+call HighlightExtraWhitespace()
 " Section: Spellcheck {{{1
 "" spell check all git commit messages
 
