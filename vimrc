@@ -239,7 +239,7 @@ function! StripExtraWhitespace()
     call cursor(l, c)
 endfunction
 
-" Section: Keybindings {{{1
+" Section: Key bindings {{{1
 
 "" buffa flippin'
 map <C-n> :bnext<CR>
@@ -277,7 +277,7 @@ nnoremap <leader>sw :call StripExtraWhitespace()<CR>
 
 call ColorSchemeMolokai()
 call HighlightExtraWhitespace()
-" Section: Spellcheck {{{1
+" Section: Spell check {{{1
 "" spell check all git commit messages
 
 "" underline misspellings
@@ -288,7 +288,7 @@ hi SpellBad cterm=underline
 nnoremap zn ]s
 nnoremap zp [s
 
-" toggle spellcheck
+" toggle spell check
 nnoremap z! :setlocal spell!<CR>
 
 " replace current misspelling with first suggestion
