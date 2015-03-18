@@ -61,7 +61,7 @@ nnoremap <leader>ve :split $MYVIMRC<CR>
 "
 " Install VIM-PLUG
 if !filereadable(expand('~/.vim/autoload/plug.vim'))
-    echo "Installing vim-plug..."
+    silent !echo "Installing VIM Plug"
     silent !mkdir -p ~/.vim/autoload
     silent !curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
