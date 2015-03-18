@@ -108,9 +108,10 @@ Plug 'Shougo/unite.vim' "{{{
             \ 'node_modules/',
             \ 'tmp/'
             \ ], '\|'))
-        nmap <buffer> <C-j> <Plug>(unite_select_next_line)
-        nmap <buffer> <C-k> <Plug>(unite_select_prev_line)
-        nmap <buffer> <Esc> <Plug>(unite_exit)
+
+        imap <silent><buffer> <C-j> <Plug>(unite_select_next_line)
+        imap <silent><buffer> <C-k> <Plug>(unite_select_previous_line)
+        imap <silent><buffer> <Esc> <Plug>(unite_exit)
     endfunction
 
     Plug 'Shougo/neomru.vim'           " Required for file_mru
@@ -121,17 +122,24 @@ Plug 'Shougo/unite.vim' "{{{
     let g:unite_source_history_yank_enable = 1
     let g:unite_source_rec_max_cache_files=5000
 
-    nmap ; [unite]
-    nnoremap [unite] <nop>
+    "nmap ; [unite]
+    "nnoremap [unite] <nop>
 
-    nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=files -start-insert file_rec/async:!<CR>
+    "nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=files -start-insert buffer file_rec/async:!<CR>
+    "nnoremap <silent> [unite]r :Unite -buffer-name=recent -start-insert file_mru<CR>
 
-    nnoremap <leader>/ :Unite grep:.<CR>
-    "nmap <C-y> [unite]y
+   " nnoremap <leader>/ :Unite grep:.<CR>
+   "nmap <C-y> [unite]y
+
+    nnoremap <silent> ; :Unite -toggle -no-split -buffer-name=files -start-insert buffer file_rec/async:!<CR>
 
     " Use silver searcher if available
     if executable('ag')
+        " Use instead of `find`
         let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
+
+        " Use instead of grep
+        let g:unite_source_grep = 'ag'
     else
         echom "Silver Searcher is unavailable, unite results will probably be irritating"
     endif
