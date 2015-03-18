@@ -23,7 +23,7 @@ let mapleader = " "
 let maplocalleader = " "
 
 set autoread                        " Carry over indenting from previous line
-set wildmenu                        " Handy autocompletion menu
+set wildmenu                        " Handy auto completion menu
 
 set list
 set listchars=tab:→\ ,trail:←,extends:»,precedes:«
@@ -40,6 +40,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
+set spell
 " Attempt to put backup files in /run/user/$UID/vim
 function! DetermineBackupDirectory()
     let l:dirpath=expand("/run/user/$UID")
@@ -279,13 +280,19 @@ call HighlightExtraWhitespace()
 " Section: Spellcheck {{{1
 "" spell check all git commit messages
 
-"" underline misspelings
+"" underline misspellings
 hi clear SpellBad
 hi SpellBad cterm=underline
 
-map <leader>ss :setlocal spell!<CR>
-map <leader>sn ]s
-map <leader>sp [s
+" more intuitive (for me at least) misspelling navigation
+nnoremap zn ]s
+nnoremap zp [s
+
+" toggle spellcheck
+nnoremap z! :setlocal spell!<CR>
+
+" replace current misspelling with first suggestion
+nnoremap zf <Esc>1z=
 
 " Section: Read .vimlocal if available {{{1
 if filereadable(expand('~/.vimlocal'))
