@@ -1,0 +1,11 @@
+#!/bin/sh
+# Regenerate all .spl files for all .add files in spell/
+
+SPELL_FILE_DIR="`git rev-parse --show-toplevel`/spell/*.add"
+
+for file in $SPELL_FILE_DIR; do
+	SPELL_FILE="$file" \
+		vim -i NONE -u NORC -U NONE -nNesc '
+			execute ":mkspell! " . fnameescape($SPELL_FILE) | echo "" | qall!
+		'
+done
