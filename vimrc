@@ -129,8 +129,8 @@ Plug 'Shougo/unite.vim' "{{{
     "nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=files -start-insert buffer file_rec/async:!<CR>
     "nnoremap <silent> [unite]r :Unite -buffer-name=recent -start-insert file_mru<CR>
 
-   " nnoremap <leader>/ :Unite grep:.<CR>
-   "nmap <C-y> [unite]y
+    nnoremap <leader>/ :Unite grep:.<CR>
+    "nmap <C-y> [unite]y
 
     nnoremap <silent> ; :Unite -toggle -no-split -buffer-name=files -start-insert buffer file_rec/async:!<CR>
 
