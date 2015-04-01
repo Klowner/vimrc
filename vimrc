@@ -31,6 +31,8 @@ set infercase                       " Completion recognizes capitalisation
 set smartcase                       " Derp
 set ignorecase                      " Case insensitivity
 set incsearch                       " Search as you type
+set hidden                          " Sometimes I don't want to save a buffer
+                                    " before switching buffers
 
 set backupdir=~/tmp
 set modelines=5
@@ -132,7 +134,8 @@ Plug 'Shougo/unite.vim' "{{{
     nnoremap <leader>/ :Unite grep:.<CR>
     "nmap <C-y> [unite]y
 
-    nnoremap <silent> ; :Unite -toggle -no-split -buffer-name=files -start-insert buffer file_rec/async:!<CR>
+    nnoremap <silent> ; :Unite -toggle -buffer-name=files -start-insert buffer file_rec/async:!<CR>
+    nnoremap <silent> <tab> :Unite -toggle -buffer-name=files -start-insert buffer <CR>
 
     " Use silver searcher if available
     if executable('ag')
