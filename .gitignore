@@ -2,3 +2,4 @@ plugged
 autoload
 *.swp
 *.spl
+.netrwhist
