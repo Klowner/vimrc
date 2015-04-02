@@ -84,6 +84,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } "{{{
     let g:javascript_conceal_function   = "ƒ"
 "}}}
+if executable('node')
+    Plug 'marijnh/tern_for_vim',  { 'for': 'javascript', 'do': 'npm install' }
+endif
 
 "-----------------------------------------
 " Color Schemes
