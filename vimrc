@@ -173,8 +173,9 @@ Plug 'tpope/vim-fugitive', "{{{
     map \l :Glog<CR>
 "}}}
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
-    let NERDTreeQuitOnOpen = 0
-    let NERDTreeShowLineNumbers = 0
+    let g:NERDTreeQuitOnOpen = 0
+    let g:NERDTreeShowLineNumbers = 0
+    let g:NERDTreeWinPos = "right"
     nmap \e :NERDTreeToggle<CR>
 "}}}
 Plug 'Shougo/neocomplete.vim' "{{{
@@ -188,6 +189,7 @@ Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_auto_jump=0
     let g:syntastic_javascript_jslint_conf = "--nomen"
     let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+    let g:syntastic_auto_loc_list=1
 "}}}
 Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
