@@ -190,6 +190,9 @@ Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_javascript_jslint_conf = "--nomen"
     let g:syntastic_javascript_checkers = ['jshint', 'jscs']
     let g:syntastic_auto_loc_list=1
+    let g:syntastic_error_symbol = '✗'
+    let g:syntastic_warning_symbol = '!'
+
 "}}}
 Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
@@ -213,8 +216,11 @@ function! ColorSchemeMolokai()
     endtry
     highlight SpecialKey cterm=None ctermfg=235 ctermbg=None
 
-    hi SignColumn ctermbg=232
-    hi LineNr ctermbg=232 ctermfg=236
+    highlight SignColumn ctermbg=232
+    highlight LineNr ctermbg=232 ctermfg=236
+    highlight SyntasticError ctermfg=53 ctermbg=197
+    highlight SyntasticWarning ctermfg=58 ctermbg=226
+
 endfunction
 
 function! ColorTermSolarized()
@@ -278,6 +284,12 @@ nnoremap <leader>pu :PlugUpdate<CR>
 nnoremap <leader>pi :PlugInstall<CR>
 nnoremap <leader>pc :PlugClean<CR>
 
+"" quickfix list nav with ctrl+j/k
+nnoremap <C-j> :lnext<CR>
+nnoremap <C-k> :lprev<CR>
+
+"" show jump list
+nnoremap <leader>o :jumps<CR>
 
 nnoremap <leader>sw :call StripExtraWhitespace()<CR>
 
