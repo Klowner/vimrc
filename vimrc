@@ -44,7 +44,7 @@ set shiftwidth=4
 
 set spell
 " Attempt to put backup files in /run/user/$UID/vim
-function! DetermineBackupDirectory()
+function! s:DetermineBackupDirectory()
     let l:dirpath=expand("/run/user/$UID")
     if isdirectory(l:dirpath)
         if !isdirectory(l:dirpath . 'vim')
@@ -54,7 +54,12 @@ function! DetermineBackupDirectory()
     endif
 endfunction
 
-call DetermineBackupDirectory()
+call s:DetermineBackupDirectory()
+
+let s:cache_dir = &backupdir . '/cache'
+function! s:get_cache_dir(suffix)
+    return resolve(expand(s:cache_dir . '/' . a:suffix))
+endfunction
 
 " Quick vim config edits
 nnoremap <leader>ve :split $MYVIMRC<CR>
@@ -75,15 +80,16 @@ call plug#begin('~/.vim/plugged')
 "-----------------------------------------
 " Syntax
 "-----------------------------------------
-Plug 'ap/vim-css-color',      { 'for': ['css', 'less', 'sass'] }
-Plug 'nono/vim-handlebars',   { 'for': 'handlebars' }
-Plug 'groenewege/vim-less',   { 'for': 'less' }
-Plug 'othree/html5.vim',      { 'for': 'html' }
-Plug 'tpope/vim-markdown',    { 'for': 'markdown' }
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' } "{{{
+Plug 'ap/vim-css-color',                    { 'for': ['css', 'less', 'sass'] }
+Plug 'groenewege/vim-less',                 { 'for': ['less'] }
+Plug 'nono/vim-handlebars',                 { 'for': ['handlebars'] }
+Plug 'othree/html5.vim',                    { 'for': ['html'] }
+Plug 'pangloss/vim-javascript',             { 'for': ['javascript'] } "{{{
     let g:javascript_conceal_function   = "ƒ"
 "}}}
+Plug 'leshill/vim-json',                    { 'for': ['javascript', 'json']}
+Plug 'tpope/vim-markdown',                  { 'for': ['markdown']}
+Plug 'briancollins/vim-jst',                { 'for': ['ejs', 'jst']}
 if executable('node')
     Plug 'marijnh/tern_for_vim',  { 'for': 'javascript', 'do': 'npm install' }
 endif
@@ -92,8 +98,8 @@ endif
 " Color Schemes
 "-----------------------------------------
 Plug 'tomasr/molokai'
-Plug 'jnurmine/Zenburn'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'jnurmine/Zenburn'
+"Plug 'altercation/vim-colors-solarized'
 
 "-----------------------------------------
 " Functionality
@@ -178,31 +184,53 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
     let g:NERDTreeWinPos = "right"
     nmap \e :NERDTreeToggle<CR>
 "}}}
-Plug 'Shougo/neocomplete.vim' "{{{
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
-    inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "<S-tab>"
-"}}}
-Plug 'scrooloose/syntastic' "{{{
-    let g:syntastic_enable_signs=1
-    let g:syntastic_auto_jump=0
-    let g:syntastic_javascript_jslint_conf = "--nomen"
-    let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-    let g:syntastic_auto_loc_list=1
-    let g:syntastic_error_symbol = '✗'
-    let g:syntastic_warning_symbol = '!'
 
-"}}}
 Plug 'Lokaltog/vim-easymotion'
+Plug 'Shougo/vimproc.vim',                  { 'do': 'make' }
 Plug 'airblade/vim-gitgutter'
+Plug 'gregsexton/gitv'
+Plug 'scrooloose/nerdcommenter' " <leader>cc comment, <leader>cu uncomment
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'gregsexton/gitv'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'scrooloose/nerdcommenter' " <leader>cc comment, <leader>cu uncomment
+Plug 'scrooloose/syntastic' "{{{
+    let g:syntastic_enable_signs = 1
+    let g:syntastic_auto_jump = 0
+    let g:syntastic_javascript_jslint_conf = "--nomen"
+    let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_error_symbol = '✗'
+    let g:syntastic_style_error_symbol = '◼'
+    let g:syntastic_warning_symbol = '▲'
+    let g:syntastic_style_warning_symbol = '≈'
+"}}}
+
+"-----------------------------------------
+" Autocomplete
+"-----------------------------------------
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim' "{{{
+    let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets,~/.vim/snippets'
+    let g:neosnippet#enable_snipmate_compatibility = 1
+
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+    smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+"}}}
+
+Plug 'Shougo/neocomplete.vim' "{{{
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#data_directory = s:get_cache_dir('neocomplete')
+    "inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
+    "inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "<S-tab>"
+"}}}
+
+
 call plug#end()
+
+"}}}
 
 " Section: Color Schemes {{{1
 
