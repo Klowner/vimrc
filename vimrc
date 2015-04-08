@@ -41,6 +41,7 @@ set modeline
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set clipboard=unnamed
 
 set spell
 " Attempt to put backup files in /run/user/$UID/vim
@@ -63,6 +64,7 @@ endfunction
 
 " Quick vim config edits
 nnoremap <leader>ve :split $MYVIMRC<CR>
+"}}}
 
 " Section: VIM-PLUG Installation {{{1
 "
@@ -104,6 +106,16 @@ Plug 'tomasr/molokai'
 "-----------------------------------------
 " Functionality
 "-----------------------------------------
+Plug 'Lokaltog/vim-easymotion'
+Plug 'Shougo/vimproc.vim',                  { 'do': 'make' }
+Plug 'airblade/vim-gitgutter'
+Plug 'gregsexton/gitv'
+Plug 'guns/xterm-color-table.vim',          { 'on': 'XtermColorTable' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
 Plug 'Shougo/unite.vim' "{{{
     autocmd FileType unite call s:unite_my_settings()
     function! s:unite_my_settings()
@@ -148,12 +160,16 @@ Plug 'Shougo/unite.vim' "{{{
 
     " Use silver searcher if available
     if executable('ag')
+        " Use instead of grep
+        let g:unite_source_grep_command = 'ag'
+
         " Use instead of `find`
         let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
-
-        " Use instead of grep
-        let g:unite_source_grep = 'ag'
-    else
+        let g:unite_source_grep_recursive_opt = ''
+    elseif executable('awk')
+        let g:unite_source_grep_command = 'ack'
+        let g:unite_source_grep_default_opts = '--no-heading --no-color -C4'
+        let g:unite_source_grep_recursive_opt = ''
         echom "Silver Searcher is unavailable, unite results will probably be irritating"
     endif
 
@@ -184,15 +200,16 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
     let g:NERDTreeWinPos = "right"
     nmap \e :NERDTreeToggle<CR>
 "}}}
-
-Plug 'Lokaltog/vim-easymotion'
-Plug 'Shougo/vimproc.vim',                  { 'do': 'make' }
-Plug 'airblade/vim-gitgutter'
-Plug 'gregsexton/gitv'
-Plug 'scrooloose/nerdcommenter' " <leader>cc comment, <leader>cu uncomment
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
+    nmap <Leader>a& :Tabularize /^<CR>
+    vmap <Leader>a& :Tabularize /^<CR>
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:<CR>
+    vmap <Leader>a: :Tabularize /:<CR>
+    nmap <Leader>a, :Tabularize /,<CR>
+    vmap <Leader>a, :Tabularize /,<CR>
+"}}}
 Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_enable_signs = 1
     let g:syntastic_auto_jump = 0
@@ -203,6 +220,11 @@ Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_style_error_symbol = '◼'
     let g:syntastic_warning_symbol = '▲'
     let g:syntastic_style_warning_symbol = '≈'
+"}}}
+Plug 'mbbill/undotree',                     { 'on': 'UndotreeToggle' } "{{{
+    let g:undotree_SplitLocation = 'botright'
+    let g:undotree_FocusWhenToggle=1
+    nnoremap \r :UndotreeToggle<CR>
 "}}}
 
 "-----------------------------------------
@@ -227,9 +249,7 @@ Plug 'Shougo/neocomplete.vim' "{{{
     "inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "<S-tab>"
 "}}}
 
-
 call plug#end()
-
 "}}}
 
 " Section: Color Schemes {{{1
@@ -261,6 +281,7 @@ function! ColorTermSolarized()
     endtry
     highlight SpecialKey cterm=None ctermfg=234 ctermbg=None
 endfunction
+"}}}
 
 " Section: Helpful Functions {{{1
 
@@ -280,6 +301,7 @@ function! StripExtraWhitespace()
     let @/=_s
     call cursor(l, c)
 endfunction
+"}}}
 
 " Section: Key bindings {{{1
 
@@ -321,10 +343,21 @@ nnoremap <leader>o :jumps<CR>
 
 nnoremap <leader>sw :call StripExtraWhitespace()<CR>
 
+"" smash escape
+inoremap jk <esc>
+inoremap kj <esc>
+
+"" screen line scroll
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+"}}}
+
 " Section: Visual tweaks {{{1
 
 call ColorSchemeMolokai()
 call HighlightExtraWhitespace()
+"}}}
+
 " Section: Spell check {{{1
 "" spell check all git commit messages
 
@@ -341,6 +374,7 @@ nnoremap z! :setlocal spell!<CR>
 
 " replace current misspelling with first suggestion
 nnoremap zf <Esc>1z=
+"}}}
 
 " Section: Read .vimlocal if available {{{1
 if filereadable(expand('~/.vimlocal'))
