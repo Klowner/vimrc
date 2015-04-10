@@ -41,7 +41,6 @@ set modeline
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set clipboard=unnamed
 set completeopt-=preview
 
 set spell
@@ -93,6 +92,7 @@ Plug 'pangloss/vim-javascript',             { 'for': ['javascript'] } "{{{
 Plug 'leshill/vim-json',                    { 'for': ['javascript', 'json']}
 Plug 'tpope/vim-markdown',                  { 'for': ['markdown']}
 Plug 'briancollins/vim-jst',                { 'for': ['ejs', 'jst']}
+Plug 'evanmiller/nginx-vim-syntax',         { 'for': ['nginx']}
 if executable('node')
     Plug 'marijnh/tern_for_vim',  { 'for': 'javascript', 'do': 'npm install' }
 endif
@@ -112,7 +112,6 @@ Plug 'Shougo/vimproc.vim',                  { 'do': 'make' }
 Plug 'airblade/vim-gitgutter'
 Plug 'gregsexton/gitv'
 Plug 'guns/xterm-color-table.vim',          { 'on': 'XtermColorTable' }
-Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
@@ -345,10 +344,6 @@ nnoremap <C-k> :lprev<CR>
 nnoremap <leader>o :jumps<CR>
 
 nnoremap <leader>sw :call StripExtraWhitespace()<CR>
-
-"" smash escape
-inoremap jk <esc>
-inoremap kj <esc>
 
 "" screen line scroll
 nnoremap <silent> j gj
