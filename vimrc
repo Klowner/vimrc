@@ -200,6 +200,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
     let g:NERDTreeQuitOnOpen = 0
     let g:NERDTreeShowLineNumbers = 0
     let g:NERDTreeWinPos = "right"
+    let g:NERDTreeIgnore = ['\.pyc$']
     nmap \e :NERDTreeToggle<CR>
 "}}}
 Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
