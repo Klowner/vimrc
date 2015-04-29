@@ -229,6 +229,7 @@ Plug 'mbbill/undotree',                     { 'on': 'UndotreeToggle' } "{{{
     let g:undotree_FocusWhenToggle=1
     nnoremap \r :UndotreeToggle<CR>
 "}}}
+Plug 'embear/vim-localvimrc'
 
 "-----------------------------------------
 " Autocomplete
@@ -271,6 +272,7 @@ function! ColorSchemeMolokai()
     highlight LineNr ctermbg=232 ctermfg=236
     highlight SyntasticError ctermfg=53 ctermbg=197
     highlight SyntasticWarning ctermfg=58 ctermbg=226
+    highlight Todo ctermbg=243 ctermbg=65
 
 endfunction
 
