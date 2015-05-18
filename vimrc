@@ -229,7 +229,10 @@ Plug 'mbbill/undotree',                     { 'on': 'UndotreeToggle' } "{{{
     let g:undotree_FocusWhenToggle=1
     nnoremap \r :UndotreeToggle<CR>
 "}}}
-Plug 'embear/vim-localvimrc'
+Plug 'embear/vim-localvimrc', "{{{
+    let g:localvimrc_persistent=2
+    let g:localvimrc_persistence_file=expand('$HOME/.config/localvimrc_persistent')
+"}}}
 
 "-----------------------------------------
 " Autocomplete
