@@ -94,6 +94,7 @@ Plug 'tpope/vim-markdown',                  { 'for': ['markdown']}
 Plug 'briancollins/vim-jst',                { 'for': ['ejs', 'jst']}
 Plug 'evanmiller/nginx-vim-syntax',         { 'for': ['nginx']}
 Plug 'evidens/vim-twig',                    { 'for': ['twig']}
+Plug 'StanAngeloff/php.vim',                { 'for': ['php']}
 if executable('node')
     Plug 'marijnh/tern_for_vim',  { 'for': 'javascript', 'do': 'npm install' }
 endif
