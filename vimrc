@@ -197,6 +197,7 @@ Plug 'bling/vim-airline', "{{{
 Plug 'tpope/vim-fugitive', "{{{
     map \b :Gblame<CR>
     map \l :Glog<CR>
+    map \gs :Gstatus<CR>
 "}}}
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
     let g:NERDTreeQuitOnOpen = 0
