@@ -116,7 +116,10 @@ Plug 'gregsexton/gitv'
 Plug 'guns/xterm-color-table.vim',          { 'on': 'XtermColorTable' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-sleuth'
+Plug 'ciaranm/detectindent' "{{{
+    let g:detectindent_preferred_expandtab=1
+    let g:detectindent_preferred_indent=4
+"}}}
 Plug 'tpope/vim-surround'
 Plug 'Shougo/unite.vim' "{{{
     autocmd FileType unite call s:unite_my_settings()
