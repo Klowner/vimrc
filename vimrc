@@ -103,8 +103,6 @@ endif
 " Color Schemes
 "-----------------------------------------
 Plug 'tomasr/molokai'
-"Plug 'jnurmine/Zenburn'
-"Plug 'altercation/vim-colors-solarized'
 
 "-----------------------------------------
 " Functionality
