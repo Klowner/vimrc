@@ -102,7 +102,7 @@ endif
 "-----------------------------------------
 " Color Schemes
 "-----------------------------------------
-Plug 'tomasr/molokai'
+Plug 'fatih/molokai'
 
 "-----------------------------------------
 " Functionality
@@ -217,6 +217,8 @@ Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
     nmap <Leader>a, :Tabularize /,<CR>
     vmap <Leader>a, :Tabularize /,<CR>
 "}}}
+Plug 'fatih/vim-go', {'for': 'go'}
+Plug 'garyburd/go-explorer', {'for': 'go', 'do': 'go get -u github.com/garyburd/go-explorer/src/getool'}
 Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_enable_signs = 1
     let g:syntastic_auto_jump = 0
@@ -236,6 +238,9 @@ Plug 'mbbill/undotree',                     { 'on': 'UndotreeToggle' } "{{{
 Plug 'embear/vim-localvimrc', "{{{
     let g:localvimrc_persistent=2
     let g:localvimrc_persistence_file=expand('$HOME/.config/localvimrc_persistent')
+"}}}
+Plug 'majutsushi/tagbar', "{{{
+    nmap \t :TagbarToggle<CR>
 "}}}
 
 "-----------------------------------------
@@ -267,14 +272,14 @@ call plug#end()
 
 function! ColorSchemeMolokai()
     set background=dark
-    let g:molokai_original = 0
+    let g:molokai_original = 1
     let g:rehash256 = 1
     try
         colo molokai
     catch
     endtry
     highlight SpecialKey cterm=None ctermfg=235 ctermbg=None
-
+    highlight Normal ctermbg=None
     highlight SignColumn ctermbg=232
     highlight LineNr ctermbg=232 ctermfg=236
     highlight SyntasticError ctermfg=53 ctermbg=197
@@ -365,6 +370,9 @@ nnoremap <silent> k gk
 call ColorSchemeMolokai()
 call HighlightExtraWhitespace()
 "}}}
+
+" GVim stuff
+set guifont=Envy\ Code\ R\ 10
 
 " Section: Spell check {{{1
 "" spell check all git commit messages
