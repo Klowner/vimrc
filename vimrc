@@ -215,6 +215,8 @@ Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
     vmap <Leader>a: :Tabularize /:\zs<CR>
     nmap <Leader>a, :Tabularize /,<CR>
     vmap <Leader>a, :Tabularize /,<CR>
+    nmap <Leader>a# :Tabularize /#<CR>
+    vmap <Leader>a# :Tabularize /#<CR>
 "}}}
 Plug 'fatih/vim-go', {'for': 'go'}
 "Plug 'garyburd/go-explorer', {'for': 'go', 'do': 'go get -u github.com/garyburd/go-explorer/src/getool'}
