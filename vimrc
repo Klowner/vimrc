@@ -86,9 +86,7 @@ Plug 'ap/vim-css-color',                    { 'for': ['css', 'less', 'sass'] }
 Plug 'groenewege/vim-less',                 { 'for': ['less'] }
 Plug 'nono/vim-handlebars',                 { 'for': ['handlebars'] }
 Plug 'othree/html5.vim',                    { 'for': ['html'] }
-Plug 'pangloss/vim-javascript',             { 'for': ['javascript'] } "{{{
-    let g:javascript_conceal_function   = "ƒ"
-"}}}
+Plug 'jelera/vim-javascript-syntax',        { 'for': ['javascript'] }
 Plug 'leshill/vim-json',                    { 'for': ['javascript', 'json']}
 Plug 'tpope/vim-markdown',                  { 'for': ['markdown']}
 Plug 'briancollins/vim-jst',                { 'for': ['ejs', 'jst']}
@@ -218,7 +216,7 @@ Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
     vmap <Leader>a, :Tabularize /,<CR>
 "}}}
 Plug 'fatih/vim-go', {'for': 'go'}
-Plug 'garyburd/go-explorer', {'for': 'go', 'do': 'go get -u github.com/garyburd/go-explorer/src/getool'}
+"Plug 'garyburd/go-explorer', {'for': 'go', 'do': 'go get -u github.com/garyburd/go-explorer/src/getool'}
 Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_enable_signs = 1
     let g:syntastic_auto_jump = 0
@@ -279,11 +277,10 @@ function! ColorSchemeMolokai()
     catch
     endtry
     highlight SpecialKey cterm=None ctermfg=235 ctermbg=None
-    highlight Normal ctermbg=None
     highlight SignColumn ctermbg=232
     highlight LineNr ctermbg=232 ctermfg=236
-    highlight SyntasticError ctermfg=53 ctermbg=197
-    highlight SyntasticWarning ctermfg=58 ctermbg=226
+    "highlight SyntasticError ctermfg=53 ctermbg=197
+    "highlight SyntasticWarning ctermfg=58 ctermbg=226
     highlight Todo ctermbg=243 ctermbg=65
 
 endfunction
