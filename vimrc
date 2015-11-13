@@ -96,6 +96,7 @@ Plug 'StanAngeloff/php.vim',                { 'for': ['php']}
 if executable('node')
     Plug 'marijnh/tern_for_vim',  { 'for': 'javascript', 'do': 'npm install' }
 endif
+Plug 'lunaru/vim-twig',                     { 'for': ['twig'] }
 
 "-----------------------------------------
 " Color Schemes
