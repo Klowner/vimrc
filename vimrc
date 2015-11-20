@@ -97,6 +97,7 @@ if executable('node')
     Plug 'marijnh/tern_for_vim',  { 'for': 'javascript', 'do': 'npm install' }
 endif
 Plug 'lunaru/vim-twig',                     { 'for': ['twig'] }
+Plug 'digitaltoad/vim-jade',                { 'for': ['jade'] }
 
 "-----------------------------------------
 " Color Schemes
@@ -113,9 +114,13 @@ Plug 'gregsexton/gitv'
 Plug 'guns/xterm-color-table.vim',          { 'on': 'XtermColorTable' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-sensible'
-Plug 'ciaranm/detectindent' "{{{
+Plug 'roryokane/detectindent' "{{{
     let g:detectindent_preferred_expandtab=1
     let g:detectindent_preferred_indent=4
+    augroup DetectIndent
+        autocmd!
+        autocmd BufReadPost * DetectIndent
+    augroup END
 "}}}
 Plug 'tpope/vim-surround'
 Plug 'Shougo/unite.vim' "{{{
@@ -217,6 +222,9 @@ Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
     vmap <Leader>a, :Tabularize /,<CR>
     nmap <Leader>a# :Tabularize /#<CR>
     vmap <Leader>a# :Tabularize /#<CR>
+    nmap <Leader>a> :Tabularize /=><CR>
+    vmap <Leader>a> :Tabularize /=><CR>
+
 "}}}
 Plug 'fatih/vim-go', {'for': 'go'}
 "Plug 'garyburd/go-explorer', {'for': 'go', 'do': 'go get -u github.com/garyburd/go-explorer/src/getool'}
@@ -230,6 +238,7 @@ Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_style_error_symbol = '◼'
     let g:syntastic_warning_symbol = '▲'
     let g:syntastic_style_warning_symbol = '≈'
+    let g:syntastic_check_on_wq = 0
 "}}}
 Plug 'mbbill/undotree',                     { 'on': 'UndotreeToggle' } "{{{
     let g:undotree_SplitLocation = 'botright'
