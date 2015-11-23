@@ -289,6 +289,7 @@ function! ColorSchemeMolokai()
     catch
     endtry
     highlight SpecialKey cterm=None ctermfg=235 ctermbg=None
+    highlight Normal ctermbg=None
     highlight SignColumn ctermbg=232
     highlight LineNr ctermbg=232 ctermfg=236
     "highlight SyntasticError ctermfg=53 ctermbg=197
