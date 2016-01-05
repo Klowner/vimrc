@@ -42,6 +42,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set completeopt-=preview
+set scrolloff=8
 
 set spell
 " Attempt to put backup files in /run/user/$UID/vim
@@ -233,6 +234,10 @@ Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_auto_jump = 0
     let g:syntastic_javascript_jslint_conf = "--nomen"
     let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+    let g:syntastic_c_checkers = ['clang_check']
+    let g:syntastic_c_lang_check_post_args = ""
+    let g:syntastic_c_check_header = 1
+    let g:syntastic_c_compiler = 'clang'
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_error_symbol = '✗'
     let g:syntastic_style_error_symbol = '◼'
@@ -288,7 +293,7 @@ function! ColorSchemeMolokai()
         colo molokai
     catch
     endtry
-    highlight SpecialKey cterm=None ctermfg=235 ctermbg=None
+    highlight SpecialKey cterm=None ctermfg=237 ctermbg=None
     highlight Normal ctermbg=None
     highlight SignColumn ctermbg=232
     highlight LineNr ctermbg=232 ctermfg=236
