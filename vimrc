@@ -187,7 +187,8 @@ Plug 'Shougo/unite.vim' "{{{
         nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<CR>
     "}}}
 "}}}
-Plug 'bling/vim-airline', "{{{
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline', "{{{
     let g:airline_left_sep = '⮀'
     let g:airline_left_alt_sep = '⮁'
     let g:airline_right_sep = '⮂'
@@ -234,10 +235,10 @@ Plug 'scrooloose/syntastic' "{{{
     let g:syntastic_auto_jump = 0
     let g:syntastic_javascript_jslint_conf = "--nomen"
     let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-    let g:syntastic_c_checkers = ['clang_check']
-    let g:syntastic_c_lang_check_post_args = ""
-    let g:syntastic_c_check_header = 1
-    let g:syntastic_c_compiler = 'clang'
+    "let g:syntastic_c_checkers = ['clang_check']
+    "let g:syntastic_c_lang_check_post_args = ""
+    "let g:syntastic_c_check_header = 1
+    "let g:syntastic_c_compiler = 'clang'
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_error_symbol = '✗'
     let g:syntastic_style_error_symbol = '◼'
@@ -257,7 +258,7 @@ Plug 'embear/vim-localvimrc', "{{{
 Plug 'majutsushi/tagbar', "{{{
     nmap \t :TagbarToggle<CR>
 "}}}
-
+Plug 'vhdirk/vim-cmake'
 "-----------------------------------------
 " Autocomplete
 "-----------------------------------------
