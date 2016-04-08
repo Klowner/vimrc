@@ -88,8 +88,9 @@ Plug 'groenewege/vim-less',                 { 'for': ['less'] }
 Plug 'nono/vim-handlebars',                 { 'for': ['handlebars'] }
 Plug 'othree/html5.vim',                    { 'for': ['html'] }
 Plug 'jelera/vim-javascript-syntax',        { 'for': ['javascript'] }
-Plug 'leshill/vim-json',                    { 'for': ['javascript', 'json']}
-Plug 'tpope/vim-markdown',                  { 'for': ['markdown']}
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript'] }
+Plug 'leshill/vim-json',                    { 'for': ['javascript', 'json'] }
+Plug 'tpope/vim-markdown',                  { 'for': ['markdown'] }
 Plug 'briancollins/vim-jst',                { 'for': ['ejs', 'jst']}
 Plug 'evanmiller/nginx-vim-syntax',         { 'for': ['nginx']}
 Plug 'evidens/vim-twig',                    { 'for': ['twig']}
