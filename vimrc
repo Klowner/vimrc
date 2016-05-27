@@ -162,11 +162,11 @@ Plug 'Shougo/unite.vim' "{{{
     "nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=files -start-insert buffer file_rec/async:!<CR>
     "nnoremap <silent> [unite]r :Unite -buffer-name=recent -start-insert file_mru<CR>
 
-    nnoremap <leader>/ :Unite grep:.<CR>
+    "nnoremap <leader>/ :Unite grep:.<CR>
     "nmap <C-y> [unite]y
 
-    nnoremap <silent> ; :Unite -toggle -buffer-name=files -start-insert buffer file_rec/async:!<CR>
-    nnoremap <silent> <tab> :Unite -toggle -buffer-name=files -start-insert buffer <CR>
+    "nnoremap <silent> ; :Unite -toggle -buffer-name=files -start-insert buffer file_rec/async:!<CR>
+    "nnoremap <silent> <tab> :Unite -toggle -buffer-name=files -start-insert buffer <CR>
 
     " Use silver searcher if available
     if executable('ag')
@@ -261,6 +261,12 @@ Plug 'majutsushi/tagbar', "{{{
     nmap \t :TagbarToggle<CR>
 "}}}
 Plug 'vhdirk/vim-cmake'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim', "{{{
+    nnoremap <silent> ; :Files<CR>
+    nnoremap <leader>/ :Ag<CR>
+
+"}}}
 Plug 'jmcomets/vim-pony', { 'for': 'python' }
 
 "-----------------------------------------
