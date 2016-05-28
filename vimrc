@@ -261,6 +261,8 @@ Plug 'majutsushi/tagbar', "{{{
     nmap \t :TagbarToggle<CR>
 "}}}
 Plug 'vhdirk/vim-cmake'
+Plug 'jmcomets/vim-pony', { 'for': 'python' }
+
 "-----------------------------------------
 " Autocomplete
 "-----------------------------------------
