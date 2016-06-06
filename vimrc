@@ -26,7 +26,8 @@ set autoread                        " Carry over indenting from previous line
 set wildmenu                        " Handy auto completion menu
 
 set list
-set listchars=tab:→\ ,trail:←,extends:»,precedes:«
+"set listchars=tab:→\ ,trail:←,extends:»,precedes:«
+set listchars=tab:∙\ ,trail:←,extends:»,precedes:«
 set infercase                       " Completion recognizes capitalisation
 set smartcase                       " Derp
 set ignorecase                      " Case insensitivity
@@ -261,6 +262,7 @@ Plug 'majutsushi/tagbar', "{{{
     nmap \t :TagbarToggle<CR>
 "}}}
 Plug 'vhdirk/vim-cmake'
+Plug 'jalcine/cmake.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim', "{{{
     nnoremap <silent> ; :Files<CR>
