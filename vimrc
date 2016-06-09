@@ -262,7 +262,7 @@ Plug 'majutsushi/tagbar', "{{{
     nmap \t :TagbarToggle<CR>
 "}}}
 Plug 'vhdirk/vim-cmake'
-Plug 'jalcine/cmake.vim'
+"Plug 'jalcine/cmake.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim', "{{{
     nnoremap <silent> ; :Files<CR>
