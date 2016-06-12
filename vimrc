@@ -102,6 +102,7 @@ endif
 Plug 'lunaru/vim-twig',                     { 'for': ['twig'] }
 Plug 'digitaltoad/vim-jade',                { 'for': ['jade'] }
 Plug 'ekalinin/Dockerfile.vim',             { 'for': ['docker'] }
+Plug 'sheerun/vim-polyglot'
 
 "-----------------------------------------
 " Color Schemes
