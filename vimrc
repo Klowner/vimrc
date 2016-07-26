@@ -11,6 +11,7 @@
 
 set runtimepath+=~/.vim
 
+set title
 set history=700
 set background=dark
 
