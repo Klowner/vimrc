@@ -272,6 +272,8 @@ Plug 'junegunn/fzf.vim', "{{{
 
 "}}}
 Plug 'jmcomets/vim-pony', { 'for': 'python' }
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
 
 "-----------------------------------------
 " Autocomplete
