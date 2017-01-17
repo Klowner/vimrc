@@ -27,7 +27,6 @@ set autoread                        " Carry over indenting from previous line
 set wildmenu                        " Handy auto completion menu
 
 set list
-"set listchars=tab:→\ ,trail:←,extends:»,precedes:«
 set listchars=tab:∙\ ,trail:←,extends:»,precedes:«
 set infercase                       " Completion recognizes capitalisation
 set smartcase                       " Derp
@@ -120,7 +119,9 @@ Plug 'fatih/molokai'
 "-----------------------------------------
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Shougo/vimproc.vim',                  { 'do': 'make' }
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter' "{{{
+    nmap <leader>g :GitGutterToggle<CR>
+"}}}
 Plug 'gregsexton/gitv'
 Plug 'guns/xterm-color-table.vim',          { 'on': 'XtermColorTable' }
 Plug 'scrooloose/nerdcommenter'
@@ -417,7 +418,7 @@ set guifont=Envy\ Code\ R\ 10
 
 "" underline misspellings
 hi clear SpellBad
-hi SpellBad cterm=underline
+hi SpellBad cterm=italic
 
 " more intuitive (for me at least) misspelling navigation
 nnoremap zn ]s
@@ -435,4 +436,4 @@ if filereadable(expand('~/.vimlocal'))
     source ~/.vimlocal
 endif
 
-" vim:fdm=marker:ts=4:sw=4:et:
+" vim:ts=4:sw=4:et:
