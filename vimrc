@@ -319,10 +319,16 @@ function! ColorSchemeMolokai()
     catch
     endtry
     highlight SpecialKey cterm=None ctermfg=237 ctermbg=None guibg=NONE guifg=#333333
+    highlight Special guibg=NONE
     highlight Normal ctermbg=None
     highlight SignColumn ctermbg=232
     highlight LineNr ctermbg=232 ctermfg=236
     highlight Todo ctermbg=243 ctermbg=65
+
+    " GitGutter
+    highlight link GitGutterAdd Directory
+    highlight link GitGitterDelete Statement
+    highlight link GitGutterChange CursorlineNr
 
     if has('termguicolors')
         " Use clear background color
