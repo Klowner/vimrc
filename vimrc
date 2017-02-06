@@ -27,7 +27,7 @@ set autoread                        " Carry over indenting from previous line
 set wildmenu                        " Handy auto completion menu
 
 set list
-set listchars=tab:∙\ ,trail:←,extends:»,precedes:«
+set listchars=tab:░\ ,trail:▂,extends:»,precedes:«
 set infercase                       " Completion recognizes capitalisation
 set smartcase                       " Derp
 set ignorecase                      " Case insensitivity
@@ -318,14 +318,17 @@ function! ColorSchemeMolokai()
         colo molokai
     catch
     endtry
-    highlight SpecialKey cterm=None ctermfg=237 ctermbg=None
+    highlight SpecialKey cterm=None ctermfg=237 ctermbg=None guibg=NONE guifg=#333333
     highlight Normal ctermbg=None
     highlight SignColumn ctermbg=232
     highlight LineNr ctermbg=232 ctermfg=236
-    "highlight SyntasticError ctermfg=53 ctermbg=197
-    "highlight SyntasticWarning ctermfg=58 ctermbg=226
     highlight Todo ctermbg=243 ctermbg=65
 
+    if has('termguicolors')
+        " Use clear background color
+        highlight Normal ctermbg=NONE guibg=NONE
+        set termguicolors
+    endif
 endfunction
 
 function! ColorTermSolarized()
@@ -344,9 +347,9 @@ endfunction
 
 " highlight trailing whitespace with garish color
 function! HighlightExtraWhitespace()
-    highlight ExtraWhitespace ctermfg=204 ctermbg=161
-    match ExtraWhitespace /\s\+$/
+    highlight ExtraWhitespace ctermfg=204 ctermbg=161 guifg=#ff2266 guibg=NONE
     highlight SpecialKey ctermbg=None
+    match ExtraWhitespace /\s\+$/
 endfunction
 
 " trim all trailing whitespace
@@ -406,7 +409,6 @@ nnoremap <silent> k gk
 "}}}
 
 " Section: Visual tweaks {{{1
-
 call ColorSchemeMolokai()
 call HighlightExtraWhitespace()
 "}}}
