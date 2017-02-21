@@ -27,7 +27,7 @@ set autoread                        " Carry over indenting from previous line
 set wildmenu                        " Handy auto completion menu
 
 set list
-set listchars=tab:░\ ,trail:▂,extends:»,precedes:«
+set listchars=tab:·\ ,trail:▂,extends:»,precedes:«
 set infercase                       " Completion recognizes capitalisation
 set smartcase                       " Derp
 set ignorecase                      " Case insensitivity
@@ -85,6 +85,7 @@ call plug#begin('~/.vim/plugged')
 " Syntax
 "-----------------------------------------
 Plug 'ap/vim-css-color',                    { 'for': ['css', 'less', 'sass'] }
+Plug 'chrisbra/Colorizer'
 Plug 'groenewege/vim-less',                 { 'for': ['less'] }
 Plug 'nono/vim-handlebars',                 { 'for': ['handlebars'] }
 Plug 'othree/html5.vim',                    { 'for': ['html'] }
@@ -113,6 +114,7 @@ Plug 'posva/vim-vue'
 " Color Schemes
 "-----------------------------------------
 Plug 'fatih/molokai'
+Plug 'morhetz/gruvbox'
 
 "-----------------------------------------
 " Functionality
@@ -126,6 +128,7 @@ Plug 'gregsexton/gitv'
 Plug 'guns/xterm-color-table.vim',          { 'on': 'XtermColorTable' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-abolish'
 Plug 'roryokane/detectindent' "{{{
     let g:detectindent_preferred_expandtab=1
     let g:detectindent_preferred_indent=4
@@ -277,6 +280,24 @@ Plug 'junegunn/fzf.vim', "{{{
     nnoremap <silent> ; :Files<CR>
     nnoremap <leader>/ :Ag<CR>
 
+    function! s:buflist()
+        redir => ls
+        silent ls
+        redir END
+        return split(ls,'\n')
+    endfunction
+
+    function! s:bufopen(e)
+        execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+    endfunction
+
+    nnoremap <silent> <Leader><Enter> :call fzf#run({
+    \   'source':   reverse(<sid>buflist()),
+    \   'sink':     function('<sid>bufopen'),
+    \   'options':  '+m',
+    \   'down':     len(<sid>buflist()) + 2
+    \})<CR>
+
 "}}}
 Plug 'jmcomets/vim-pony', { 'for': 'python' }
 Plug 'mattn/webapi-vim'
@@ -309,6 +330,19 @@ call plug#end()
 "}}}
 
 " Section: Color Schemes {{{1
+
+function! ColorSchemeGruvbox()
+    set background=dark
+    let g:rehash256 = 1
+    colorscheme gruvbox
+    let g:airline_theme = 'gruvbox'
+    if has('termguicolors')
+        highlight Normal ctermbg=None guibg=NONE
+        set termguicolors
+    endif
+    hi clear SpecialKey
+    hi link SpecialKey NonText
+endfunction
 
 function! ColorSchemeMolokai()
     set background=dark
@@ -353,8 +387,9 @@ endfunction
 
 " highlight trailing whitespace with garish color
 function! HighlightExtraWhitespace()
-    highlight ExtraWhitespace ctermfg=204 ctermbg=161 guifg=#ff2266 guibg=NONE
-    highlight SpecialKey ctermbg=None
+    "highlight ExtraWhitespace ctermfg=204 ctermbg=161 guifg=#ff2266 guibg=#ff2266
+    "highlight SpecialKey ctermbg=None
+    highlight link ExtraWhitespace DiffDelete
     match ExtraWhitespace /\s\+$/
 endfunction
 
@@ -415,7 +450,8 @@ nnoremap <silent> k gk
 "}}}
 
 " Section: Visual tweaks {{{1
-call ColorSchemeMolokai()
+"call ColorSchemeMolokai()
+call ColorSchemeGruvbox()
 call HighlightExtraWhitespace()
 "}}}
 
