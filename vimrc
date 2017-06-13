@@ -84,7 +84,7 @@ call plug#begin('~/.vim/plugged')
 "-----------------------------------------
 " Syntax
 "-----------------------------------------
-Plug 'ap/vim-css-color',                    { 'for': ['css', 'less', 'sass'] }
+Plug 'ap/vim-css-color',                    { 'for': ['css', 'less', 'sass', 'scss'] }
 Plug 'chrisbra/Colorizer'
 Plug 'groenewege/vim-less',                 { 'for': ['less'] }
 Plug 'nono/vim-handlebars',                 { 'for': ['handlebars'] }
