@@ -450,8 +450,8 @@ nnoremap <silent> k gk
 "}}}
 
 " Section: Visual tweaks {{{1
-"call ColorSchemeMolokai()
-call ColorSchemeGruvbox()
+call ColorSchemeMolokai()
+"call ColorSchemeGruvbox()
 call HighlightExtraWhitespace()
 "}}}
 
