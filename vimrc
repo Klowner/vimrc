@@ -274,11 +274,8 @@ Plug 'majutsushi/tagbar', "{{{
     nmap \t :TagbarToggle<CR>
 "}}}
 Plug 'vhdirk/vim-cmake'
-"Plug 'jalcine/cmake.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim', "{{{
-    nnoremap <silent> ; :Files<CR>
-    nnoremap <leader>/ :Ag<CR>
 
     function! s:buflist()
         redir => ls
@@ -298,6 +295,28 @@ Plug 'junegunn/fzf.vim', "{{{
     \   'down':     len(<sid>buflist()) + 2
     \})<CR>
 
+    function! s:FuzzyFiles()
+        let gitparent=system('git rev-parse --show-toplevel')[:-2]
+        let rootdir='.'
+
+        if empty(matchstr(gitparent, '^fatal:.*'))
+            silent call fzf#run({
+                        \ 'dir':     gitparent,
+                        \ 'source':  '(git ls-tree -r --name-only HEAD | rg --files)',
+                        \ 'sink':    'e',
+                        \})
+        else
+            silent call fzf#run({
+                        \ 'dir':     '.',
+                        \ 'source':  'rg --files',
+                        \ 'sink':    'e',
+                        \})
+        endif
+
+    endfunction
+
+    nnoremap <silent> ; :call <sid>FuzzyFiles()<CR>
+    nnoremap <leader>/ :Ag<CR>
 "}}}
 Plug 'jmcomets/vim-pony', { 'for': 'python' }
 Plug 'mattn/webapi-vim'
@@ -387,9 +406,9 @@ endfunction
 
 " highlight trailing whitespace with garish color
 function! HighlightExtraWhitespace()
-    "highlight ExtraWhitespace ctermfg=204 ctermbg=161 guifg=#ff2266 guibg=#ff2266
+    highlight ExtraWhitespace ctermfg=204 ctermbg=161 guifg=#ff2266 guibg=#ff2266
     "highlight SpecialKey ctermbg=None
-    highlight link ExtraWhitespace DiffDelete
+    "highlight link ExtraWhitespace DiffDelete
     match ExtraWhitespace /\s\+$/
 endfunction
 
