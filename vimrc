@@ -33,7 +33,7 @@ set smartcase                       " Derp
 set ignorecase                      " Case insensitivity
 set incsearch                       " Search as you type
 set hidden                          " Sometimes I don't want to save a buffer
-                                    " before switching buffers
+" before switching buffers
 
 set backupdir=~/tmp
 set modelines=5
@@ -94,7 +94,7 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript'] }
 Plug 'leshill/vim-json',                    { 'for': ['javascript', 'json'] }
 Plug 'tpope/vim-markdown',                  { 'for': ['markdown'] }
 Plug 'briancollins/vim-jst',                { 'for': ['ejs', 'jst']}
-Plug 'evanmiller/nginx-vim-syntax',         { 'for': ['nginx']}
+Plug 'chr4/nginx.vim',                      { 'for': ['nginx']}
 Plug 'evidens/vim-twig',                    { 'for': ['twig']}
 Plug 'StanAngeloff/php.vim',                { 'for': ['php']}
 if executable('node')
@@ -105,8 +105,8 @@ Plug 'digitaltoad/vim-jade',                { 'for': ['jade'] }
 Plug 'ekalinin/Dockerfile.vim',             { 'for': ['docker'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'rhysd/vim-clang-format',              { 'for': ['cpp', 'c'] } "{{{
-    nmap <Leader>C :ClangFormatAutoToggle<CR>
-    let g:clang_format#detect_style_file = 1
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+let g:clang_format#detect_style_file = 1
 "}}}
 Plug 'posva/vim-vue'
 
@@ -122,7 +122,7 @@ Plug 'morhetz/gruvbox'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Shougo/vimproc.vim',                  { 'do': 'make' }
 Plug 'airblade/vim-gitgutter' "{{{
-    nmap <leader>g :GitGutterToggle<CR>
+nmap <leader>g :GitGutterToggle<CR>
 "}}}
 Plug 'gregsexton/gitv'
 Plug 'guns/xterm-color-table.vim',          { 'on': 'XtermColorTable' }
@@ -130,111 +130,111 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
 Plug 'roryokane/detectindent' "{{{
-    let g:detectindent_preferred_expandtab=1
-    let g:detectindent_preferred_indent=4
-    augroup DetectIndent
-        autocmd!
-        autocmd BufReadPost * DetectIndent
-    augroup END
+let g:detectindent_preferred_expandtab=1
+let g:detectindent_preferred_indent=4
+augroup DetectIndent
+    autocmd!
+    autocmd BufReadPost * DetectIndent
+augroup END
 "}}}
 Plug 'tpope/vim-surround'
 Plug 'Shougo/unite.vim' "{{{
-    autocmd FileType unite call s:unite_my_settings()
-    function! s:unite_my_settings()
-        call unite#filters#matcher_default#use(['matcher_fuzzy'])
-        call unite#filters#sorter_default#use(['sorter_rank'])
-        call unite#custom#profile('files', 'context.smartcase', 1)
-        call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    call unite#filters#sorter_default#use(['sorter_rank'])
+    call unite#custom#profile('files', 'context.smartcase', 1)
+    call unite#custom#source('line,outline', 'matchers', 'matcher_fuzzy')
 
-        call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-            \ 'ignore_pattern', join([
-            \ '\.git',
-            \ 'google/obj/',
-            \ 'dist/',
-            \ 'node_modules/',
-            \ 'tmp/'
-            \ ], '\|'))
+    call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+                \ 'ignore_pattern', join([
+                \ '\.git',
+                \ 'google/obj/',
+                \ 'dist/',
+                \ 'node_modules/',
+                \ 'tmp/'
+                \ ], '\|'))
 
-        imap <silent><buffer> <C-j> <Plug>(unite_select_next_line)
-        imap <silent><buffer> <C-k> <Plug>(unite_select_previous_line)
-        imap <silent><buffer> <Esc> <Plug>(unite_exit)
-    endfunction
+    imap <silent><buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <silent><buffer> <C-k> <Plug>(unite_select_previous_line)
+    imap <silent><buffer> <Esc> <Plug>(unite_exit)
+endfunction
 
-    Plug 'Shougo/neomru.vim'           " Required for file_mru
-    Plug 'Shougo/unite-session'        " Provides session (project) support
-    Plug 'Shougo/unite-outline'
+Plug 'Shougo/neomru.vim'           " Required for file_mru
+Plug 'Shougo/unite-session'        " Provides session (project) support
+Plug 'Shougo/unite-outline'
 
-    let g:unite_data_directory=&backupdir . '/unite'
-    let g:unite_source_history_yank_enable = 1
-    let g:unite_source_rec_max_cache_files=5000
+let g:unite_data_directory=&backupdir . '/unite'
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_rec_max_cache_files=5000
 
-    "nmap ; [unite]
-    "nnoremap [unite] <nop>
+"nmap ; [unite]
+"nnoremap [unite] <nop>
 
-    "nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=files -start-insert buffer file_rec/async:!<CR>
-    "nnoremap <silent> [unite]r :Unite -buffer-name=recent -start-insert file_mru<CR>
+"nnoremap <silent> [unite] :Unite -toggle -no-split -buffer-name=files -start-insert buffer file_rec/async:!<CR>
+"nnoremap <silent> [unite]r :Unite -buffer-name=recent -start-insert file_mru<CR>
 
-    "nnoremap <leader>/ :Unite grep:.<CR>
-    "nmap <C-y> [unite]y
+"nnoremap <leader>/ :Unite grep:.<CR>
+"nmap <C-y> [unite]y
 
-    "nnoremap <silent> ; :Unite -toggle -buffer-name=files -start-insert buffer file_rec/async:!<CR>
-    "nnoremap <silent> <tab> :Unite -toggle -buffer-name=files -start-insert buffer <CR>
+"nnoremap <silent> ; :Unite -toggle -buffer-name=files -start-insert buffer file_rec/async:!<CR>
+"nnoremap <silent> <tab> :Unite -toggle -buffer-name=files -start-insert buffer <CR>
 
-    " Use silver searcher if available
-    if executable('ag')
-        " Use instead of grep
-        let g:unite_source_grep_command = 'ag'
-        let g:unite_source_grep_default_opts =
-                    \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-                    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-        let g:unite_source_grep_recursive_opt = ''
-        " Use instead of `find`
-        let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
-    elseif executable('awk')
-        let g:unite_source_grep_command = 'ack'
-        let g:unite_source_grep_default_opts = '--no-heading --no-color -C4'
-        let g:unite_source_grep_recursive_opt = ''
-        echom "Silver Searcher is unavailable, unite results will probably be irritating"
-    endif
+" Use silver searcher if available
+if executable('ag')
+    " Use instead of grep
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+                \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+                \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
+    " Use instead of `find`
+    let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
+elseif executable('awk')
+    let g:unite_source_grep_command = 'ack'
+    let g:unite_source_grep_default_opts = '--no-heading --no-color -C4'
+    let g:unite_source_grep_recursive_opt = ''
+    echom "Silver Searcher is unavailable, unite results will probably be irritating"
+endif
 
-    Plug 'Shougo/unite-outline' "{{{
-        nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<CR>
-    "}}}
+Plug 'Shougo/unite-outline' "{{{
+nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<CR>
+"}}}
 "}}}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline', "{{{
-    let g:airline_left_sep = '⮀'
-    let g:airline_left_alt_sep = '⮁'
-    let g:airline_right_sep = '⮂'
-    let g:airline_right_alt_sep = '⮃'
-    let g:airline_symbols = {}
-    let g:airline_symbols.branch = '⭠'
-    let g:airline_symbols.readonly = '⭤'
-    let g:airline_symbols.linenr = '⭡'
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#fnamemod = ':t'
-    let g:airline_theme = 'luna'
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols = {}
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_theme = 'luna'
 "}}}
 Plug 'tpope/vim-fugitive', "{{{
-    map \b :Gblame<CR>
-    map \l :Glog<CR>
-    map \gs :Gstatus<CR>
+map \b :Gblame<CR>
+map \l :Glog<CR>
+map \gs :Gstatus<CR>
 "}}}
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
-    let g:NERDTreeQuitOnOpen = 0
-    let g:NERDTreeShowLineNumbers = 0
-    let g:NERDTreeWinPos = "right"
-    let g:NERDTreeIgnore = ['\.pyc$']
-    nmap \e :NERDTreeToggle<CR>
+let g:NERDTreeQuitOnOpen = 0
+let g:NERDTreeShowLineNumbers = 0
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeIgnore = ['\.pyc$']
+nmap \e :NERDTreeToggle<CR>
 "}}}
 Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
-    nmap <Leader>a& :Tabularize /^<CR>
-    vmap <Leader>a& :Tabularize /^<CR>
-    nmap <Leader>a= :Tabularize /=<CR>
-    vmap <Leader>a= :Tabularize /=<CR>
-    nmap <Leader>a: :Tabularize /:\zs<CR>
-    vmap <Leader>a: :Tabularize /:\zs<CR>
-    nmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a& :Tabularize /^<CR>
+vmap <Leader>a& :Tabularize /^<CR>
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
     vmap <Leader>a, :Tabularize /,<CR>
     nmap <Leader>a# :Tabularize /#<CR>
     vmap <Leader>a# :Tabularize /#<CR>
@@ -243,24 +243,31 @@ Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
 
 "}}}
 Plug 'fatih/vim-go', {'for': 'go'}
-"Plug 'garyburd/go-explorer', {'for': 'go', 'do': 'go get -u github.com/garyburd/go-explorer/src/getool'}
-Plug 'scrooloose/syntastic' "{{{
-    let g:syntastic_enable_signs = 1
-    let g:syntastic_auto_jump = 0
-    let g:syntastic_javascript_jslint_conf = "--nomen"
-    let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-    let g:syntastic_python_checkers =['python', 'flake8']
-    "let g:syntastic_c_checkers = ['clang_check']
-    "let g:syntastic_c_lang_check_post_args = ""
-    "let g:syntastic_c_check_header = 1
-    "let g:syntastic_c_compiler = 'clang'
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_error_symbol = '✗'
-    let g:syntastic_style_error_symbol = '◼'
-    let g:syntastic_warning_symbol = '▲'
-    let g:syntastic_style_warning_symbol = '≈'
-    let g:syntastic_check_on_wq = 0
+Plug 'w0rp/ale' "{{{
+    let g:ale_linters = {
+                \ 'cpp': ['gcc', 'cppcheck'],
+                \}
 "}}}
+
+"Plug 'garyburd/go-explorer', {'for': 'go', 'do': 'go get -u github.com/garyburd/go-explorer/src/getool'}
+"Plug 'scrooloose/syntastic' "{{{
+    "let g:syntastic_enable_signs = 1
+    "let g:syntastic_auto_jump = 0
+    "let g:syntastic_javascript_jslint_conf = "--nomen"
+    "let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+    "let g:syntastic_python_checkers =['python', 'flake8']
+    "let g:syntastic_python_flake8_post_args = "--max-line-length=120"
+    ""let g:syntastic_c_checkers = ['clang_check']
+    ""let g:syntastic_c_lang_check_post_args = ""
+    ""let g:syntastic_c_check_header = 1
+    ""let g:syntastic_c_compiler = 'clang'
+    "let g:syntastic_auto_loc_list = 1
+    "let g:syntastic_error_symbol = '✗'
+    "let g:syntastic_style_error_symbol = '◼'
+    "let g:syntastic_warning_symbol = '▲'
+    "let g:syntastic_style_warning_symbol = '≈'
+    "let g:syntastic_check_on_wq = 0
+""}}}
 Plug 'mbbill/undotree',                     { 'on': 'UndotreeToggle' } "{{{
     let g:undotree_SplitLocation = 'botright'
     let g:undotree_FocusWhenToggle=1
