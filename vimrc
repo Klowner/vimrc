@@ -352,6 +352,8 @@ Plug 'Shougo/neocomplete.vim' "{{{
     "inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "<S-tab>"
 "}}}
 
+Plug 'Rip-Rip/clang_complete', { 'for': 'cpp' }
+
 call plug#end()
 "}}}
 
