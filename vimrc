@@ -109,6 +109,7 @@ nmap <Leader>C :ClangFormatAutoToggle<CR>
 let g:clang_format#detect_style_file = 1
 "}}}
 Plug 'posva/vim-vue'
+Plug 'a-watson/vim-gdscript', { 'for': ['gdscript'] }
 
 "-----------------------------------------
 " Color Schemes
@@ -228,13 +229,13 @@ let g:NERDTreeIgnore = ['\.pyc$']
 nmap \e :NERDTreeToggle<CR>
 "}}}
 Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
-nmap <Leader>a& :Tabularize /^<CR>
-vmap <Leader>a& :Tabularize /^<CR>
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
+    nmap <Leader>a& :Tabularize /^<CR>
+    vmap <Leader>a& :Tabularize /^<CR>
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+    nmap <Leader>a, :Tabularize /,\zs<CR>
     vmap <Leader>a, :Tabularize /,<CR>
     nmap <Leader>a# :Tabularize /#<CR>
     vmap <Leader>a# :Tabularize /#<CR>
