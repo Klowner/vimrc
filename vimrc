@@ -116,6 +116,7 @@ Plug 'a-watson/vim-gdscript', { 'for': ['gdscript'] }
 "-----------------------------------------
 Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
+Plug 'drewtempelmeyer/palenight.vim'
 
 "-----------------------------------------
 " Functionality
@@ -246,7 +247,7 @@ Plug 'godlygeek/tabular',                   { 'on': 'Tabularize' } "{{{
 Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'w0rp/ale' "{{{
     let g:ale_linters = {
-                \ 'cpp': ['gcc', 'cppcheck'],
+                \ 'cpp': ['gcc']
                 \}
 "}}}
 
@@ -412,6 +413,17 @@ function! ColorTermSolarized()
 endfunction
 "}}}
 
+function! ColorSchemePalenight()
+    let g:palenight_terminal_italics=1
+    set background=dark
+    try
+        colo palenight
+    endtry
+    if has('termguicolors')
+        set termguicolors
+    endif
+endfunction
+
 " Section: Helpful Functions {{{1
 
 " highlight trailing whitespace with garish color
@@ -479,8 +491,9 @@ nnoremap <silent> k gk
 "}}}
 
 " Section: Visual tweaks {{{1
-call ColorSchemeMolokai()
+"call ColorSchemeMolokai()
 "call ColorSchemeGruvbox()
+call ColorSchemePalenight()
 call HighlightExtraWhitespace()
 "}}}
 
