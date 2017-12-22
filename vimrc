@@ -68,6 +68,11 @@ endfunction
 nnoremap <leader>ve :split $MYVIMRC<CR>
 "}}}
 
+" Use ripgrep if available
+if executable('rg')
+    set grepprg=rg\ --vimgrep
+endif
+
 " Section: VIM-PLUG Installation {{{1
 "
 " Install VIM-PLUG
@@ -183,7 +188,10 @@ let g:unite_source_rec_max_cache_files=5000
 "nnoremap <silent> <tab> :Unite -toggle -buffer-name=files -start-insert buffer <CR>
 
 " Use silver searcher if available
-if executable('ag')
+if executable('rg')
+    " Use ripgrep instead of grep
+    let g:unite_source_grep_command = 'rg'
+elseif executable('ag')
     " Use instead of grep
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts =
@@ -196,7 +204,7 @@ elseif executable('awk')
     let g:unite_source_grep_command = 'ack'
     let g:unite_source_grep_default_opts = '--no-heading --no-color -C4'
     let g:unite_source_grep_recursive_opt = ''
-    echom "Silver Searcher is unavailable, unite results will probably be irritating"
+    "echom "Silver Searcher is unavailable, unite results will probably be irritating"
 endif
 
 Plug 'Shougo/unite-outline' "{{{
@@ -249,6 +257,7 @@ Plug 'w0rp/ale' "{{{
     let g:ale_linters = {
                 \ 'cpp': ['gcc']
                 \}
+    let g:ale_python_pylint_options = '--load-plugins pylint_django'
 "}}}
 
 "Plug 'garyburd/go-explorer', {'for': 'go', 'do': 'go get -u github.com/garyburd/go-explorer/src/getool'}
@@ -321,11 +330,17 @@ Plug 'junegunn/fzf.vim', "{{{
                         \ 'sink':    'e',
                         \})
         endif
-
     endfunction
 
+    command! -bang -nargs=* Rg
+                \ call fzf#vim#grep(
+                \  'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+                \  <bang>0 ? fzf#vim#with_preview('up:60%')
+                \          : fzf#vim#with_preview('right:50%:hidden', '?'),
+                \  <bang>0)
+
     nnoremap <silent> ; :call <sid>FuzzyFiles()<CR>
-    nnoremap <leader>/ :Ag<CR>
+    nnoremap <leader>/ :Rg<CR>
 "}}}
 Plug 'jmcomets/vim-pony', { 'for': 'python' }
 Plug 'mattn/webapi-vim'
